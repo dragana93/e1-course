@@ -41,6 +41,18 @@ describe('NotesService', () => {
     httpTesting.verify();
   });
 
+  describe('getNotes', () => {
+    it('should GET all notes', () => {
+      service.getNotes().subscribe((notes) => {
+        expect(notes).toEqual([mockNote]);
+      });
+
+      const req = httpTesting.expectOne('api/notes');
+      expect(req.request.method).toBe('GET');
+      req.flush([mockNote]);
+    });
+  });
+
   describe('createNote', () => {
     it('should POST the note and return the created note', () => {
       service.createNote(mockNote).subscribe((result) => {

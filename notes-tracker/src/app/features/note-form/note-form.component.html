@@ -1,0 +1,32 @@
+<div class="form-page">
+  <div class="form-card">
+    <h1 class="form-card__title">{{ editingNote ? 'Edit Note' : 'New Note' }}</h1>
+    <form class="note-form" [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <label class="form-field__label" for="title">Title</label>
+        <input
+          class="form-field__input"
+          id="title"
+          formControlName="title"
+          placeholder="Enter a title…"
+        />
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="content">Content</label>
+        <textarea
+          class="form-field__textarea"
+          id="content"
+          formControlName="content"
+          placeholder="Write your note…"
+          rows="6"
+        ></textarea>
+      </div>
+      <div class="form-card__actions">
+        <button class="btn btn--primary" type="submit" [disabled]="noteForm.invalid">
+          {{ editingNote ? 'Update Note' : 'Create Note' }}
+        </button>
+        <button class="btn btn--ghost" type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

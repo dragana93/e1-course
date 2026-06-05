@@ -1,34 +1,33 @@
-<section>
-  <h1>Notes</h1>
-
-  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="title">Title</label>
-      <input id="title" formControlName="title" placeholder="Title" />
-    </div>
-    <div>
-      <label for="content">Content</label>
-      <textarea id="content" formControlName="content" placeholder="Content"></textarea>
-    </div>
-    <button type="submit" [disabled]="noteForm.invalid">
-      {{ editingNote ? 'Update Note' : 'Create Note' }}
+<div class="notes-page">
+  <div class="notes-header">
+    <h1 class="notes-title">My Notes</h1>
+    <button class="btn btn--primary" (click)="onAdd()">
+      + New Note
     </button>
-    <button type="button" *ngIf="editingNote" (click)="resetForm()">Cancel</button>
-  </form>
-</section>
+  </div>
 
-<section>
-  <h2>All Notes</h2>
-  <ul>
-    <li *ngFor="let note of notes">
-      <strong>{{ note.title }}</strong>
-      <p>{{ note.content }}</p>
-      <small>Last modified: {{ note.lastModified | date:'medium' }}</small>
-      <div>
-        <button (click)="onEdit(note)">Edit</button>
-        <button (click)="onDelete(note.id)">Delete</button>
-      </div>
-    </li>
-  </ul>
-  <p *ngIf="notes.length === 0">No notes yet.</p>
-</section>
+  @if (notes.length === 0) {
+    <div class="notes-empty">
+      <p class="notes-empty__text">No notes yet. Create your first one!</p>
+    </div>
+  } @else {
+    <ul class="notes-list">
+      @for (note of notes; track note.id) {
+        <li class="note-card">
+          <div class="note-card__body">
+            <h2 class="note-card__title">{{ note.title }}</h2>
+            <p class="note-card__content">{{ note.content }}</p>
+          </div>
+          <div class="note-card__footer">
+            <small class="note-card__date">{{ note.lastModified | date:'medium' }}</small>
+            <div class="note-card__actions">
+              <button class="btn btn--secondary" (click)="onEdit(note)">Edit</button>
+              <button class="btn btn--danger" (click)="onDelete(note.id)">Delete</button>
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>
+

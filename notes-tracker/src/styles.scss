@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+// ── Design tokens ─────────────────────────────────────────────────────────────
+:root {
+  --color-primary: #6c63ff;
+  --color-primary-dark: #574fd6;
+  --color-danger: #e53e3e;
+  --color-danger-dark: #c53030;
+  --color-secondary: #4a5568;
+  --color-secondary-dark: #2d3748;
+  --color-bg: #f7f8fc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #1a202c;
+  --color-text-muted: #718096;
+  --radius: 10px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --transition: 150ms ease;
+}
+
+// ── Reset / base ──────────────────────────────────────────────────────────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+// ── Shared button system ──────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  white-space: nowrap;
+
+  &:active { transform: scale(0.97); }
+  &:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  &--primary {
+    background: var(--color-primary);
+    color: #fff;
+    &:hover:not(:disabled) {
+      background: var(--color-primary-dark);
+      box-shadow: 0 4px 12px rgba(108, 99, 255, 0.35);
+    }
+  }
+
+  &--secondary {
+    background: var(--color-secondary);
+    color: #fff;
+    &:hover:not(:disabled) { background: var(--color-secondary-dark); }
+  }
+
+  &--danger {
+    background: var(--color-danger);
+    color: #fff;
+    &:hover:not(:disabled) {
+      background: var(--color-danger-dark);
+      box-shadow: 0 4px 12px rgba(229, 62, 62, 0.30);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1.5px solid var(--color-border);
+    &:hover:not(:disabled) {
+      background: var(--color-border);
+      color: var(--color-text);
+    }
+  }
+}
+
